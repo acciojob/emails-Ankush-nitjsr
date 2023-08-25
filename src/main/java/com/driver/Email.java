@@ -25,5 +25,39 @@ public class Email {
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
+        if(this.password.equals(oldPassword)){
+            if(isValid(newPassword)){
+                System.out.println("Password changed successfully");
+                this.password = newPassword;
+            } else{
+                System.out.println("Please enter a valid password");
+            }
+        } else {
+            System.out.println("Password entered doesn't match with current password");
+        }
+    }
+
+    public boolean isValid (String newPassword) {
+        if(newPassword.length() < 8) return false;
+
+        boolean uppercaseCharacter = false;
+        boolean lowercaseCharacter = false;
+        boolean digitCharacter = false;
+        boolean specialCharacter = false;
+
+        for (char ch : newPassword.toCharArray()) {
+            if (ch >= 'A' && ch <= 'Z') {
+                uppercaseCharacter = true;
+            } else if (ch >= 'a' && ch<= 'z') {
+                lowercaseCharacter = true;
+            } else if (Character.isDigit(ch)) {
+                digitCharacter = true;
+            } else {
+                specialCharacter = true;
+            }
+        }
+
+        if (uppercaseCharacter && lowercaseCharacter && digitCharacter && specialCharacter) return true;
+        return false;
     }
 }
